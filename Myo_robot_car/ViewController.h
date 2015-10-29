@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface ViewController : UIViewController
 
 
 @end
 
+@protocol blueDataDelegate <NSObject>
+
+-(void)blueDataDelegateSend:(Byte)byte;
+
+@end

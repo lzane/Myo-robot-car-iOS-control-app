@@ -13,14 +13,20 @@
 #import <MyoKit/MyoKit.h>
 #import "MBProgressHUD+CZ.h"
 #import "ZNCemeraView.h"
+#import "BabyBluetooth.h"
+#import "ZNBlueToothController.h"
 
-@interface ViewController ()<FancyTabBarDelegate>
+
+@interface ViewController ()<FancyTabBarDelegate,ZNBlueToothDelegate>
 
 @property(nonatomic,strong) FancyTabBar *fancyTabBar;
 @property (nonatomic,strong) UIImageView *backgroundView;
 @property (weak, nonatomic) IBOutlet UILabel *blueToothLabel;
 @property (weak, nonatomic) IBOutlet UILabel *myoLabel;
 @property (weak, nonatomic) IBOutlet ZNCemeraView *cemeraView;
+@property (strong, nonatomic) ZNBlueToothController* bluetoothController ;
+
+
 
 @property (nonatomic,assign) int moveOrder ;
 @property (nonatomic,assign) BOOL isMove ;
@@ -30,6 +36,7 @@
 @end
 
 @implementation ViewController
+
 
 - (void)viewDidLoad
 {
@@ -48,6 +55,7 @@
     [self.cemeraView initView];
     self.cemeraView.scalesPageToFit = YES ;
     [self.cemeraView sendSubviewToBack:self.view];
+    
     
     
 }
@@ -98,8 +106,18 @@
     if (index == 5) {
         [self initMyoNotification];
         [self modalPresentMyoSettings];
+    }else if(index == 4){
+        [self performSegueWithIdentifier:@"bluetoothView" sender:nil];
     }
     
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"bluetoothView"]) {
+        ZNBlueToothController *blue = segue.destinationViewController ;
+        blue.delegate = self ;
+        self.bluetoothController = blue ;
+    }
 }
 
 #pragma mark - Myo
@@ -109,6 +127,7 @@
     
     [self presentViewController:settings animated:YES completion:nil];
 }
+
 
 
 
@@ -330,4 +349,26 @@
         [pose.myo indicateUserAction];
     }
 }
+
+
+
+#pragma mark -ZNBluetooth
+
+-(void)changeBlueToothConnectTo:(BOOL)connectivity{
+    if (connectivity) {
+        [self.blueToothLabel setText:@"CONNECTED" ];
+        [self.blueToothLabel setFont:[UIFont boldSystemFontOfSize:14]];
+        [self.blueToothLabel setTextColor:[UIColor blackColor]];
+
+    }else{
+        [self.blueToothLabel setText:@"DISCONNECTED" ];
+        [self.blueToothLabel setTextColor:[UIColor lightGrayColor]];
+        [self.blueToothLabel setFont:[UIFont systemFontOfSize:14]];
+
+    }
+}
+
+
+
+
 @end
