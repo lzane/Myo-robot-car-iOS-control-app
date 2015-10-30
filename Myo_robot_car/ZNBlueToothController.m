@@ -8,6 +8,8 @@
 
 #import "ZNBlueToothController.h"
 #import "BabyBluetooth.h"
+#import "ViewController.h"
+#import "MBProgressHUD+CZ.h"
 
 #define channelOnPeropheralView @"peripheralView"
 
@@ -18,12 +20,14 @@
 
 }
 
+@property (weak, nonatomic) IBOutlet UILabel *currentOrderLabel;
 
 @property(nonatomic,strong) CBPeripheral *peripheral ;
 @property (nonatomic,strong) NSMutableArray *serviceArr ;
 @property (nonatomic,strong) CBCharacteristic* charac ;
 @property (weak, nonatomic) IBOutlet UITextField *orderTextField;
-@property (assign,nonatomic) int order ;
+
+
 
 
 @end
@@ -119,7 +123,7 @@
 
 - (IBAction)orderTextFieldEditingEnd:(id)sender {
     UITextField *tf = sender ;
-    self.order = [tf.text intValue];
+    self.mainVC.moveOrder = [tf.text intValue];
 }
 
 
@@ -154,10 +158,27 @@
 -(void)getinfo{
     //设置peripheral 然后读取services,然后读取characteristics名称和值和属性，获取characteristics对应的description的名称和值
     //self.peripheral是一个CBPeripheral实例
-    
-    baby.having(self.peripheral).connectToPeripherals().discoverServices().discoverCharacteristics()
-    .readValueForCharacteristic().discoverDescriptorsForCharacteristic().readValueForDescriptors().begin();
+    if (self.peripheral) {
+        baby.having(self.peripheral).connectToPeripherals().discoverServices().discoverCharacteristics()
+        .readValueForCharacteristic().discoverDescriptorsForCharacteristic().readValueForDescriptors().begin();
+        
+        [MBProgressHUD showError:@"Connect success"];
+        
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUD];
+        });
 
+        
+    }else{
+        [MBProgressHUD showError:@"Cannot connect to Bluetooth"];
+        
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUD];
+        });
+    }
+   
 }
 
 
@@ -169,11 +190,13 @@
 
 
 -(void)sendData{
-
-    Byte b = self.order;
+    
+    [self.currentOrderLabel setText:[NSString stringWithFormat:@"%d",self.mainVC.moveOrder]] ;
+//    NSLog(@"%d",self.mainVC.moveOrder);
+    
+    Byte b = self.mainVC.moveOrder ;
     NSData *data = [NSData dataWithBytes:&b length:sizeof(b)];
     [self.peripheral writeValue:data forCharacteristic:self.charac type:CBCharacteristicWriteWithResponse];
-
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

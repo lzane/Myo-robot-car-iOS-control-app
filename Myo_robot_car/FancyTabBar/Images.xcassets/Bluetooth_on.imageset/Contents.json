@@ -2,8 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "whole_hand.png"
+      "filename" : "Bluetooth_on.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",

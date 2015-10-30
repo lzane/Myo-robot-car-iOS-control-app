@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ViewController.h"
 
 
 @protocol ZNBlueToothDelegate <NSObject>
@@ -19,7 +20,7 @@
 
 @interface ZNBlueToothController : UIViewController
 
-
+@property (nonatomic,weak) ViewController *mainVC;
 @property (nonatomic,weak) id<ZNBlueToothDelegate> delegate;
 @end
 

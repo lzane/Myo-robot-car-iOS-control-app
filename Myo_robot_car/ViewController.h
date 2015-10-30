@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 @interface ViewController : UIViewController
 
+@property (nonatomic,assign) int moveOrder ;
+@property (nonatomic,assign) BOOL isMove ;
 
 @end
 
 @protocol blueDataDelegate <NSObject>
+
 
 -(void)blueDataDelegateSend:(Byte)byte;
 

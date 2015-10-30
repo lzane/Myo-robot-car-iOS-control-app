@@ -28,8 +28,7 @@
 
 
 
-@property (nonatomic,assign) int moveOrder ;
-@property (nonatomic,assign) BOOL isMove ;
+
 
 @property (weak, nonatomic) IBOutlet UIImageView *handImageView;
 
@@ -107,7 +106,13 @@
         [self initMyoNotification];
         [self modalPresentMyoSettings];
     }else if(index == 4){
-        [self performSegueWithIdentifier:@"bluetoothView" sender:nil];
+        if (!self.bluetoothController) {
+            [self performSegueWithIdentifier:@"bluetoothView" sender:nil];
+        }else{
+            [self presentViewController:self.bluetoothController animated:YES completion:^{
+            }];
+        }
+        
     }
     
 }
@@ -116,7 +121,10 @@
     if ([segue.identifier isEqualToString:@"bluetoothView"]) {
         ZNBlueToothController *blue = segue.destinationViewController ;
         blue.delegate = self ;
+        blue.mainVC = self ;
         self.bluetoothController = blue ;
+        
+        
     }
 }
 
@@ -297,6 +305,8 @@
     // Retrieve the pose from the NSNotification's userInfo with the kTLMKeyPose key.
     TLMPose *pose = notification.userInfo[kTLMKeyPose];
     NSLog(@"%s   + %ld",__func__,(long)pose.type);
+    
+    self.moveOrder = pose.type ;
     
     
 //    // Handle the cases of the TLMPoseType enumeration, and change the color of helloLabel based on the pose we receive.
