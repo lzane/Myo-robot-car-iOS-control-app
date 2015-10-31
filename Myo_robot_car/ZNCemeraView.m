@@ -8,7 +8,17 @@
 
 #import "ZNCemeraView.h"
 
-@implementation ZNCemeraView
+
+
+
+@implementation ZNCemeraView {
+    int frameCounter;
+    NSMutableData *buffer1;
+    NSMutableData *buffer2;
+    NSMutableData *currentData;
+    UIImage *currentFrame;
+}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -23,25 +33,35 @@
         
         self.frame = frame ;
         
-        NSString *embedHTML = @"\
-        <html><head>\
-        <style type=\"text/css\">\
-        body {\
-        background-color: transparent;\
-        color: black;\
-        }\
-        </style>\
-        </head><body style=\"margin:0\">\
-        <embed id=\"yt\" src=\"http://192.168.1.1:8080/?action=stream \" style=\"-webkit-user-select: none\" \
-        width=640 height=480 ></embed>\
-        </body></html>";
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://192.168.1.1:8080/?action=stream"]
+                                                 cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
+        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
         
+        if (connection) {
+            currentData = [[NSMutableData alloc] init];
+        }
         
-        [self loadHTMLString:embedHTML baseURL:nil];
+       
     }
     return self ;
 }
 
+
+- (void)connection:(NSURLConnection *)theConnection didReceiveData:(NSData *)data
+{
+    [currentData appendData:data];
+}
+
+
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    if([[response MIMEType] isEqualToString:@"image/jpeg"] && [currentData length] != 0) {
+        currentFrame = [UIImage imageWithData:currentData];
+        [self setImage:currentFrame];
+    }
+    [currentData setLength:0];
+}
 
 
 @end

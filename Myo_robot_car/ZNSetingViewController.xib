@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZNSetingViewController">
+            <connections>
+                <outlet property="view" destination="2JT-Rf-wpM" id="cXS-jk-P10"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="2JT-Rf-wpM">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="infoBackground" translatesAutoresizingMaskIntoConstraints="NO" id="75N-k7-0U0">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="0.0" y="0.0" width="305" height="75"/>
+                    </variation>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ExN-Kk-Icj">
+                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <state key="normal" title="Button" image="Myo_off"/>
+                    <state key="highlighted" image="Myo_on"/>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="20" y="10" width="55" height="55"/>
+                    </variation>
+                    <connections>
+                        <action selector="MyoBtnDidClick:" destination="-1" eventType="touchUpInside" id="HSW-fD-n7S"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BYV-Ua-z5t">
+                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <state key="normal" title="Button" image="Bluetooth_off"/>
+                    <state key="highlighted" image="Bluetooth_on"/>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="90" y="10" width="55" height="55"/>
+                    </variation>
+                    <connections>
+                        <action selector="bluetoothBtnDidClick:" destination="-1" eventType="touchUpInside" id="1wu-HV-aOi"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUH-5X-iaq">
+                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <state key="normal" title="Button" image="controller_off"/>
+                    <state key="highlighted" image="controller_on"/>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="160" y="10" width="55" height="55"/>
+                    </variation>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FAU-Hs-G9k">
+                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <state key="normal" title="Button" image="About_off"/>
+                    <state key="highlighted" image="About_on"/>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="230" y="10" width="55" height="55"/>
+                    </variation>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="75N-k7-0U0"/>
+                    <exclude reference="ExN-Kk-Icj"/>
+                    <exclude reference="BYV-Ua-z5t"/>
+                    <exclude reference="TUH-5X-iaq"/>
+                    <exclude reference="FAU-Hs-G9k"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="subviews">
+                    <include reference="75N-k7-0U0"/>
+                    <include reference="ExN-Kk-Icj"/>
+                    <include reference="BYV-Ua-z5t"/>
+                    <include reference="TUH-5X-iaq"/>
+                    <include reference="FAU-Hs-G9k"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="314.5" y="212.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="About_off" width="622" height="621"/>
+        <image name="About_on" width="622" height="621"/>
+        <image name="Bluetooth_off" width="622" height="621"/>
+        <image name="Bluetooth_on" width="622" height="621"/>
+        <image name="Myo_off" width="622" height="621"/>
+        <image name="Myo_on" width="622" height="621"/>
+        <image name="controller_off" width="627" height="626"/>
+        <image name="controller_on" width="627" height="626"/>
+        <image name="infoBackground" width="765" height="400"/>
+    </resources>
+</document>

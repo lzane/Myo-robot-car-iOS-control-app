@@ -15,17 +15,20 @@
 #import "ZNCemeraView.h"
 #import "BabyBluetooth.h"
 #import "ZNBlueToothController.h"
+#import "ZNSetingViewController.h"
 
 
-@interface ViewController ()<ZNBlueToothDelegate>
+@interface ViewController ()<UIWebViewDelegate,ZNBlueToothDelegate>
 
 
 @property (nonatomic,strong) UIImageView *backgroundView;
 @property (weak, nonatomic) IBOutlet UILabel *blueToothLabel;
 @property (weak, nonatomic) IBOutlet UILabel *myoLabel;
-@property (strong,nonatomic) ZNCemeraView *cemeraView;
 
-@property (strong, nonatomic) ZNBlueToothController* bluetoothController ;
+@property (nonatomic,strong) ZNSetingViewController *settingVC ;
+
+
+
 
 
 
@@ -45,13 +48,16 @@
      */
     [self addCemera];
     
+    
 }
 
 -(void)addCemera{
-    ZNCemeraView *cemeraView = [[ZNCemeraView alloc]initViewWithFrame:CGRectMake(0, 0, 950, 320)];
-    cemeraView.scalesPageToFit = YES ;
+    
+    ZNCemeraView *cemeraView = [[ZNCemeraView alloc]initViewWithFrame:CGRectMake(0, 0, 568, 320)];
     [self.view addSubview:cemeraView];
     self.cemeraView = cemeraView ;
+    [self.view sendSubviewToBack:cemeraView];
+    
 }
 
 
@@ -158,6 +164,7 @@
 
 //    TLMMyo *myo = notification.userInfo[kTLMKeyMyo];
     [self.myoLabel setText:@"CONNECTED" ];
+    [self.myoLabel setFont:[UIFont boldSystemFontOfSize:14]];
     [MBProgressHUD showMessage:@"Perform the Sync Gesture" toView:self.view];
     
 }
@@ -166,6 +173,7 @@
     
 //    TLMMyo *myo = notification.userInfo[kTLMKeyMyo];
     [self.myoLabel setText:@"DISCONNECTED" ];
+     [self.myoLabel setFont:[UIFont systemFontOfSize:14]];
     
 }
 
@@ -313,11 +321,10 @@
     if (connectivity) {
         [self.blueToothLabel setText:@"CONNECTED" ];
         [self.blueToothLabel setFont:[UIFont boldSystemFontOfSize:14]];
-        [self.blueToothLabel setTextColor:[UIColor blackColor]];
+
 
     }else{
         [self.blueToothLabel setText:@"DISCONNECTED" ];
-        [self.blueToothLabel setTextColor:[UIColor lightGrayColor]];
         [self.blueToothLabel setFont:[UIFont systemFontOfSize:14]];
 
     }
@@ -329,11 +336,49 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+
+    [self.cemeraView removeFromSuperview];
+    self.cemeraView = nil;
     
-    [self.cemeraView removeFromSuperview ];
-    self.cemeraView = nil ;
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
     
     [self addCemera];
+}
+
+#pragma mark -- 懒加载
+
+-(ZNSetingViewController *)settingVC{
+    if (!_settingVC) {
+        _settingVC = [[ZNSetingViewController alloc]init];
+        self.settingVC.view.frame = CGRectMake(0, 0, 305, 75);
+        self.settingVC.view.center = CGPointMake(self.view.center.x, -80 );
+        _settingVC.mainVC = self ;
+         [self.view addSubview:self.settingVC.view];
+    }
+    return _settingVC ;
+}
+
+#pragma mark -- Button method
+
+- (IBAction)settingBtnDidClick:(id)sender {
+    UIButton *btn = sender ;
+    [btn setSelected:YES ] ;
+    
+    if (self.settingVC.view.center.y == -80 ) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.settingVC.view.center = CGPointMake(self.view.center.x, self.view.center.y - 30);
+        }];
+    }else{
+            [self.settingVC hideSettingView];
+    }
+   
+}
+
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    if (self.settingVC) {
+            [self.settingVC hideSettingView];
+    }
 }
 
 

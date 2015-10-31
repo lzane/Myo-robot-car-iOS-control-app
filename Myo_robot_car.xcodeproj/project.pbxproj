@@ -15,6 +15,7 @@
 		2F0D84621BE10DDD00DE055B /* BabySpeaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0D845A1BE10DDD00DE055B /* BabySpeaker.m */; };
 		2F0D84631BE10DDD00DE055B /* BabyToy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0D845C1BE10DDD00DE055B /* BabyToy.m */; };
 		2F0D84661BE10FCF00DE055B /* ZNBlueToothController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0D84651BE10FCF00DE055B /* ZNBlueToothController.m */; };
+		2F2862CB1BE47543001EAB67 /* UIWebView+ZN.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2862CA1BE47543001EAB67 /* UIWebView+ZN.m */; };
 		2F8F8C591BD7A375001E785B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F8F8C561BD7A345001E785B /* SystemConfiguration.framework */; };
 		2F8F8C5A1BD7A38B001E785B /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F8F8C541BD7A33A001E785B /* CoreBluetooth.framework */; };
 		2F8F8C661BD7ABB6001E785B /* MBProgressHUD+CZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F8C621BD7ABB6001E785B /* MBProgressHUD+CZ.m */; };
@@ -62,6 +63,8 @@
 		2F0D845C1BE10DDD00DE055B /* BabyToy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyToy.m; sourceTree = "<group>"; };
 		2F0D84641BE10FCF00DE055B /* ZNBlueToothController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZNBlueToothController.h; sourceTree = "<group>"; };
 		2F0D84651BE10FCF00DE055B /* ZNBlueToothController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZNBlueToothController.m; sourceTree = "<group>"; };
+		2F2862C91BE47543001EAB67 /* UIWebView+ZN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+ZN.h"; sourceTree = "<group>"; };
+		2F2862CA1BE47543001EAB67 /* UIWebView+ZN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+ZN.m"; sourceTree = "<group>"; };
 		2F8F8C541BD7A33A001E785B /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		2F8F8C561BD7A345001E785B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2F8F8C611BD7ABB6001E785B /* MBProgressHUD+CZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+CZ.h"; sourceTree = "<group>"; };
@@ -189,6 +192,8 @@
 				2F8F8C601BD7ABB6001E785B /* MBProgressHUD */,
 				2F9DDD1D1BD699D8006D0DE0 /* FancyTabBar */,
 				2F9DDCF51BD69943006D0DE0 /* Supporting Files */,
+				2F2862C91BE47543001EAB67 /* UIWebView+ZN.h */,
+				2F2862CA1BE47543001EAB67 /* UIWebView+ZN.m */,
 			);
 			path = Myo_robot_car;
 			sourceTree = "<group>";
@@ -328,6 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F2862CB1BE47543001EAB67 /* UIWebView+ZN.m in Sources */,
 				2F9DDD3A1BD699D8006D0DE0 /* FancyTabBar.m in Sources */,
 				2F0D84621BE10DDD00DE055B /* BabySpeaker.m in Sources */,
 				2F9DDCFE1BD69943006D0DE0 /* ViewController.m in Sources */,

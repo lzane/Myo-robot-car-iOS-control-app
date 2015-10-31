@@ -34,6 +34,7 @@
 
 + (void)showSuccess:(NSString *)success toView:(UIView *)view
 {
+    
     [self show:success icon:@"success.png" view:view];
 }
 
@@ -42,6 +43,7 @@
     if (view == nil) view = [[UIApplication sharedApplication].windows lastObject];
     // 快速显示一个提示信息
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    
     hud.labelText = message;
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;

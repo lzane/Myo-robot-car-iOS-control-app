@@ -7,10 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+
+@class ZNCemeraView,ZNBlueToothController;
+
 @interface ViewController : UIViewController
 
 @property (nonatomic,assign) int moveOrder ;
 @property (nonatomic,assign) BOOL isMove ;
+@property (strong,nonatomic) ZNCemeraView *cemeraView;
+
+@property (strong, nonatomic) ZNBlueToothController* bluetoothController ;
+
+@property (weak, nonatomic) IBOutlet UIButton *settingBtn;
+
+
+-(void)addCemera;
+-(void)initMyoNotification;
+- (void)modalPresentMyoSettings;
+
 
 @end
 

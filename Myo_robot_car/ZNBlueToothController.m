@@ -49,6 +49,7 @@
     //初始化BabyBluetooth 蓝牙库
     baby = [BabyBluetooth shareBabyBluetooth];
     
+    [MBProgressHUD showMessage:@"Connecting..."];
     
     [baby setBlockOnConnected:^(CBCentralManager *central, CBPeripheral *peripheral) {
         //设置连接成功的block
@@ -107,6 +108,14 @@
     NSTimer *timer = [NSTimer timerWithTimeInterval:0.2 target:self selector:@selector(sendData) userInfo:nil repeats:YES];
     NSRunLoop *runloop = [NSRunLoop mainRunLoop];
     [runloop addTimer:timer forMode:NSRunLoopCommonModes];
+    
+    [MBProgressHUD showSuccess:@"Timer start"];
+    
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideHUD];
+    });
+
 }
 
 - (void)viewDidLoad {
@@ -162,10 +171,11 @@
         baby.having(self.peripheral).connectToPeripherals().discoverServices().discoverCharacteristics()
         .readValueForCharacteristic().discoverDescriptorsForCharacteristic().readValueForDescriptors().begin();
         
-        [MBProgressHUD showError:@"Connect success"];
+         [MBProgressHUD hideHUD];
+        [MBProgressHUD showSuccess:@"Connect success"];
         
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUD];
         });
 
@@ -174,7 +184,7 @@
         [MBProgressHUD showError:@"Cannot connect to Bluetooth"];
         
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUD];
         });
     }

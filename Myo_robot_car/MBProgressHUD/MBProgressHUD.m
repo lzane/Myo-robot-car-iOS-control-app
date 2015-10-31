@@ -106,6 +106,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 
 + (MB_INSTANCETYPE)showHUDAddedTo:(UIView *)view animated:(BOOL)animated {
 	MBProgressHUD *hud = [[self alloc] initWithView:view];
+    
 	[view addSubview:hud];
 	[hud show:animated];
 	return MB_AUTORELEASE(hud);
@@ -716,17 +717,19 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	}
 	
 	UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    
 	CGFloat radians = 0;
-	if (UIInterfaceOrientationIsLandscape(orientation)) {
-		if (orientation == UIInterfaceOrientationLandscapeLeft) { radians = -(CGFloat)M_PI_2; } 
-		else { radians = (CGFloat)M_PI_2; }
-		// Window coordinates differ!
-		self.bounds = CGRectMake(0, 0, self.bounds.size.height, self.bounds.size.width);
-	} else {
-		if (orientation == UIInterfaceOrientationPortraitUpsideDown) { radians = (CGFloat)M_PI; } 
-		else { radians = 0; }
-	}
-	rotationTransform = CGAffineTransformMakeRotation(radians);
+//	if (UIInterfaceOrientationIsLandscape(orientation)) {
+//		if (orientation == UIInterfaceOrientationLandscapeLeft) { radians = -(CGFloat)M_PI_2; } 
+//		else { radians = (CGFloat)M_PI_2; }
+//		// Window coordinates differ!
+//		self.bounds = CGRectMake(0, 0, self.bounds.size.height, self.bounds.size.width);
+//	} else {
+//		if (orientation == UIInterfaceOrientationPortraitUpsideDown) { radians = (CGFloat)M_PI; } 
+//		else { radians = 0; }
+//	}
+    
+	rotationTransform = CGAffineTransformMakeRotation( 2 * M_PI );
 	
 	if (animated) {
 		[UIView beginAnimations:nil context:nil];
@@ -992,5 +995,11 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 	[self setNeedsDisplay];
 }
+
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return YES;
+}
+
 
 @end

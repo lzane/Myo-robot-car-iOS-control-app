@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZNCemeraView : UIWebView
+
+
+@interface ZNCemeraView : UIImageView <NSURLConnectionDataDelegate>
 
 -(instancetype)initViewWithFrame:(CGRect)frame;
 
