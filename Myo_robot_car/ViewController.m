@@ -7,9 +7,9 @@
 //
 
 #import "ViewController.h"
-#import "UIView+Screenshot.h"
-#import "UIImage+ImageEffects.h"
-#import "FancyTabBar.h"
+
+
+
 #import <MyoKit/MyoKit.h>
 #import "MBProgressHUD+CZ.h"
 #import "ZNCemeraView.h"
@@ -17,20 +17,18 @@
 #import "ZNBlueToothController.h"
 
 
-@interface ViewController ()<FancyTabBarDelegate,ZNBlueToothDelegate>
+@interface ViewController ()<ZNBlueToothDelegate>
 
-@property(nonatomic,strong) FancyTabBar *fancyTabBar;
+
 @property (nonatomic,strong) UIImageView *backgroundView;
 @property (weak, nonatomic) IBOutlet UILabel *blueToothLabel;
 @property (weak, nonatomic) IBOutlet UILabel *myoLabel;
-@property (weak, nonatomic) IBOutlet ZNCemeraView *cemeraView;
+@property (strong,nonatomic) ZNCemeraView *cemeraView;
+
 @property (strong, nonatomic) ZNBlueToothController* bluetoothController ;
 
 
 
-
-
-@property (weak, nonatomic) IBOutlet UIImageView *handImageView;
 
 @end
 
@@ -42,29 +40,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-
-    _fancyTabBar = [[FancyTabBar alloc]initWithFrame:self.view.bounds];
-    [_fancyTabBar setUpChoices:self choices:@[@"Setting",@"Stick",@"camera",@"Bluetooth",@"Myo"] withMainButtonImage:[UIImage imageNamed:@"main_button"]];
-    _fancyTabBar.delegate = self;
-    [self.view addSubview:_fancyTabBar];
-    
     /**
      * cemeraView
      */
-    [self.cemeraView initView];
-    self.cemeraView.scalesPageToFit = YES ;
-    [self.cemeraView sendSubviewToBack:self.view];
-    
-    
+    [self addCemera];
     
 }
 
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)addCemera{
+    ZNCemeraView *cemeraView = [[ZNCemeraView alloc]initViewWithFrame:CGRectMake(0, 0, 950, 320)];
+    cemeraView.scalesPageToFit = YES ;
+    [self.view addSubview:cemeraView];
+    self.cemeraView = cemeraView ;
 }
+
 
 #pragma mark - FancyTabBarDelegate
 - (void) didCollapse{
@@ -76,45 +65,6 @@
             _backgroundView = nil;
         }
     }];
-}
-
-
-- (void) didExpand{
-    if(!_backgroundView){
-        _backgroundView = [[UIImageView alloc]initWithFrame:self.view.bounds];
-        _backgroundView.alpha = 0;
-        [self.view addSubview:_backgroundView];
-    }
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        _backgroundView.alpha = 1;
-    } completion:^(BOOL finished) {
-    }];
-    
-    [self.view bringSubviewToFront:_fancyTabBar];
-    UIImage *backgroundImage = [self.view convertViewToImage];
-    UIColor *tintColor = [UIColor colorWithWhite:1.0 alpha:0.5];
-    UIImage *image = [backgroundImage applyBlurWithRadius:10 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
-    _backgroundView.image = image;
-}
-
-// PERFORM SEGUES TO NEXT VIEWS BASED ON INDEX PATH
-- (void)optionsButton:(UIButton*)optionButton didSelectItem:(int)index{
-    NSLog(@"Hello index %d tapped !", index);
-    //GALLERY SEGUE
-    if (index == 5) {
-        [self initMyoNotification];
-        [self modalPresentMyoSettings];
-    }else if(index == 4){
-        if (!self.bluetoothController) {
-            [self performSegueWithIdentifier:@"bluetoothView" sender:nil];
-        }else{
-            [self presentViewController:self.bluetoothController animated:YES completion:^{
-            }];
-        }
-        
-    }
-    
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -208,8 +158,6 @@
 
 //    TLMMyo *myo = notification.userInfo[kTLMKeyMyo];
     [self.myoLabel setText:@"CONNECTED" ];
-    [self.myoLabel setFont:[UIFont boldSystemFontOfSize:14]];
-    [self.myoLabel setTextColor:[UIColor blackColor]];
     [MBProgressHUD showMessage:@"Perform the Sync Gesture" toView:self.view];
     
 }
@@ -218,8 +166,6 @@
     
 //    TLMMyo *myo = notification.userInfo[kTLMKeyMyo];
     [self.myoLabel setText:@"DISCONNECTED" ];
-    [self.myoLabel setTextColor:[UIColor lightGrayColor]];
-    [self.myoLabel setFont:[UIFont systemFontOfSize:14]];
     
 }
 
@@ -241,8 +187,6 @@
     // Retrieve the arm event from the notification's userInfo with the kTLMKeyArmSyncEvent key.
     TLMArmSyncEvent *armEvent = notification.userInfo[kTLMKeyArmSyncEvent];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    
-    NSLog(@"%s",__func__);
     
     // Update the armLabel with arm information.
     
@@ -271,8 +215,9 @@
     
     // Next, we want to apply a rotation and perspective transformation based on the pitch, yaw, and roll.
     CATransform3D rotationAndPerspectiveTransform = CATransform3DConcat(CATransform3DConcat(CATransform3DRotate (CATransform3DIdentity, angles.pitch.radians, 1.0, 0.0, 0.0), CATransform3DRotate(CATransform3DIdentity, angles.yaw.radians, 0.0, 0.0, 1.0)), CATransform3DRotate(CATransform3DIdentity, angles.roll.radians, 0.0, 1.0, 0.0 ));
+
     
-    [self.handImageView.layer setTransform:rotationAndPerspectiveTransform];
+    
     
     if (angles.pitch.radians < -1.0 && orientationEvent.myo.isLocked == NO ) {
         [orientationEvent.myo lock];
@@ -379,6 +324,17 @@
 }
 
 
+#pragma mark -- mermory issue
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+    
+    [self.cemeraView removeFromSuperview ];
+    self.cemeraView = nil ;
+    
+    [self addCemera];
+}
 
 
 @end

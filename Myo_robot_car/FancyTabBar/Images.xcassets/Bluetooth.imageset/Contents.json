@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "Bluetooth.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "Bluetooth.png"
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",

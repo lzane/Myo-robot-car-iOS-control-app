@@ -18,24 +18,28 @@
 }
 */
 
--(void)initView{
-    
-    NSString *embedHTML = @"\
-    <html><head>\
-    <style type=\"text/css\">\
-    body {\
-    background-color: transparent;\
-    color: black;\
-    }\
-    </style>\
-    </head><body style=\"margin:0\">\
-    <embed id=\"yt\" src=\"http://192.168.1.1:8080/?action=stream \" style=\"-webkit-user-select: none\" \
-    width=640 height=480 ></embed>\
-    </body></html>";
-    
-    
-    [self loadHTMLString:embedHTML baseURL:nil];
-
+-(instancetype)initViewWithFrame:(CGRect)frame{
+    if (self = [super init]) {
+        
+        self.frame = frame ;
+        
+        NSString *embedHTML = @"\
+        <html><head>\
+        <style type=\"text/css\">\
+        body {\
+        background-color: transparent;\
+        color: black;\
+        }\
+        </style>\
+        </head><body style=\"margin:0\">\
+        <embed id=\"yt\" src=\"http://192.168.1.1:8080/?action=stream \" style=\"-webkit-user-select: none\" \
+        width=640 height=480 ></embed>\
+        </body></html>";
+        
+        
+        [self loadHTMLString:embedHTML baseURL:nil];
+    }
+    return self ;
 }
 
 

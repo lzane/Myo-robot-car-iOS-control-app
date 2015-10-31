@@ -10,6 +10,6 @@
 
 @interface ZNCemeraView : UIWebView
 
--(void)initView;
+-(instancetype)initViewWithFrame:(CGRect)frame;
 
 @end
