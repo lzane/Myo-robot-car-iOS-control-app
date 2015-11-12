@@ -28,6 +28,8 @@
 		2F9DDD011BD69943006D0DE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F9DDCFF1BD69943006D0DE0 /* Main.storyboard */; };
 		2F9DDD061BD69943006D0DE0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F9DDD041BD69943006D0DE0 /* LaunchScreen.xib */; };
 		2F9DDD3B1BD699D8006D0DE0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F9DDD2B1BD699D8006D0DE0 /* Images.xcassets */; };
+		2F9FB8651BF435300018746D /* armControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9FB8631BF435300018746D /* armControlViewController.m */; };
+		2F9FB8661BF435300018746D /* armControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F9FB8641BF435300018746D /* armControlViewController.xib */; };
 		2FC3FB951BE373E700CC5C9D /* ZNStickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC3FB941BE373E700CC5C9D /* ZNStickView.m */; };
 		2FCC40181BD8AD7100C2EB35 /* MyoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCC40171BD8AD7100C2EB35 /* MyoKit.framework */; };
 		2FE8E8A61BD8F02700789FEB /* ZNCemeraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE8E8A51BD8F02700789FEB /* ZNCemeraView.m */; };
@@ -81,6 +83,9 @@
 		2F9DDD2B1BD699D8006D0DE0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = FancyTabBar/Images.xcassets; sourceTree = "<group>"; };
 		2F9DDD411BD69A59006D0DE0 /* Myo_robot_car.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Myo_robot_car.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F9DDD451BD69E0D006D0DE0 /* Myo_robot_carTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Myo_robot_carTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F9FB8621BF435300018746D /* armControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = armControlViewController.h; path = ../armControlViewController.h; sourceTree = "<group>"; };
+		2F9FB8631BF435300018746D /* armControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = armControlViewController.m; path = ../armControlViewController.m; sourceTree = "<group>"; };
+		2F9FB8641BF435300018746D /* armControlViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = armControlViewController.xib; path = ../armControlViewController.xib; sourceTree = "<group>"; };
 		2FC3FB931BE373E700CC5C9D /* ZNStickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZNStickView.h; sourceTree = "<group>"; };
 		2FC3FB941BE373E700CC5C9D /* ZNStickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZNStickView.m; sourceTree = "<group>"; };
 		2FCC40171BD8AD7100C2EB35 /* MyoKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MyoKit.framework; sourceTree = "<group>"; };
@@ -164,6 +169,9 @@
 		2F9DDCF41BD69943006D0DE0 /* Myo_robot_car */ = {
 			isa = PBXGroup;
 			children = (
+				2F9FB8621BF435300018746D /* armControlViewController.h */,
+				2F9FB8631BF435300018746D /* armControlViewController.m */,
+				2F9FB8641BF435300018746D /* armControlViewController.xib */,
 				2F9DDCF91BD69943006D0DE0 /* AppDelegate.h */,
 				2F9DDCFA1BD69943006D0DE0 /* AppDelegate.m */,
 				2F9DDCFC1BD69943006D0DE0 /* ViewController.h */,
@@ -286,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F572C311BE4C640003249FC /* ZNSetingViewController.xib in Resources */,
+				2F9FB8661BF435300018746D /* armControlViewController.xib in Resources */,
 				2F9DDD011BD69943006D0DE0 /* Main.storyboard in Resources */,
 				2F8F8C671BD7ABB6001E785B /* MBProgressHUD.bundle in Resources */,
 				2F9DDD061BD69943006D0DE0 /* LaunchScreen.xib in Resources */,
@@ -319,6 +328,7 @@
 				2F8F8C681BD7ABB6001E785B /* MBProgressHUD.m in Sources */,
 				2F0D84661BE10FCF00DE055B /* ZNBlueToothController.m in Sources */,
 				2F0D84601BE10DDD00DE055B /* BabyRhythm.m in Sources */,
+				2F9FB8651BF435300018746D /* armControlViewController.m in Sources */,
 				2F9DDCF81BD69943006D0DE0 /* main.m in Sources */,
 				2F0D845D1BE10DDD00DE055B /* BabyBluetooth.m in Sources */,
 				2F0D84611BE10DDD00DE055B /* Babysister.m in Sources */,

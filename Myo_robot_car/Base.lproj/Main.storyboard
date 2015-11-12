@@ -124,30 +124,10 @@
                                         <state key="selected" image="Light_on"/>
                                         <state key="highlighted" image="Light_on"/>
                                         <variation key="widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
+                                            <rect key="frame" x="0.0" y="65" width="55" height="55"/>
                                         </variation>
                                         <connections>
                                             <action selector="lightBtnDidClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="AQZ-D9-Bg7"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Adf-Wp-I32">
-                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                        <state key="normal" image="Gallery_off"/>
-                                        <state key="highlighted" image="Gallery_on"/>
-                                        <variation key="widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="120" y="0.0" width="55" height="55"/>
-                                        </variation>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hjs-Sn-Ksj">
-                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                        <state key="normal" image="setting_off"/>
-                                        <state key="selected" image="setting_on"/>
-                                        <state key="highlighted" image="setting_on"/>
-                                        <variation key="widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="180" y="0.0" width="55" height="55"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="settingBtnDidClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="nb3-pk-4eb"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NnY-zl-srk">
@@ -155,31 +135,56 @@
                                         <state key="normal" image="Cam_off"/>
                                         <state key="highlighted" image="Cam_on"/>
                                         <variation key="widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="60" y="0.0" width="55" height="55"/>
+                                            <rect key="frame" x="60" y="65" width="55" height="55"/>
                                         </variation>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Adf-Wp-I32">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <state key="normal" image="Change_off"/>
+                                        <state key="selected" image="Change_on"/>
+                                        <state key="highlighted" image="Change_off"/>
+                                        <variation key="widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="121" y="63" width="52" height="55"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="changeBandModeBtnDidClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ubo-cA-lzX"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hjs-Sn-Ksj">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <gestureRecognizers/>
+                                        <state key="normal" image="setting_off"/>
+                                        <state key="selected" image="setting_on"/>
+                                        <state key="highlighted" image="setting_on"/>
+                                        <variation key="widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="181" y="63" width="55" height="55"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="settingBtnDidClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="nb3-pk-4eb"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="Nee-sn-rSF"/>
+                                        <exclude reference="NnY-zl-srk"/>
                                         <exclude reference="Adf-Wp-I32"/>
                                         <exclude reference="hjs-Sn-Ksj"/>
-                                        <exclude reference="NnY-zl-srk"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="167" y="215" width="235" height="55"/>
+                                    <rect key="frame" x="318" y="182" width="401" height="125"/>
                                     <mask key="subviews">
                                         <include reference="Nee-sn-rSF"/>
+                                        <include reference="NnY-zl-srk"/>
                                         <include reference="Adf-Wp-I32"/>
                                         <include reference="hjs-Sn-Ksj"/>
-                                        <include reference="NnY-zl-srk"/>
                                     </mask>
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="EhR-Kl-XU2"/>
@@ -430,8 +435,8 @@
         <image name="Bluetooth_on" width="622" height="621"/>
         <image name="Cam_off" width="622" height="621"/>
         <image name="Cam_on" width="622" height="621"/>
-        <image name="Gallery_off" width="622" height="621"/>
-        <image name="Gallery_on" width="622" height="621"/>
+        <image name="Change_off" width="627" height="627"/>
+        <image name="Change_on" width="627" height="627"/>
         <image name="Light_off" width="622" height="621"/>
         <image name="Light_on" width="622" height="621"/>
         <image name="Myo" width="284" height="283"/>

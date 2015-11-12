@@ -8,6 +8,7 @@
 
 #import "ZNSetingViewController.h"
 #import "ViewController.h"
+#import "armControlViewController.h"
 
 @interface ZNSetingViewController ()
 
@@ -60,5 +61,20 @@
     [self hideSettingView];
 }
 
+- (IBAction)armControlBtnDidClick:(id)sender {
+    
+    if (self.mainVC.armControlVC.isDisplay == YES) {
+        [self.mainVC.armControlVC.view removeFromSuperview];
+        self.mainVC.armControlVC.isDisplay = NO ;
+    }else{
+        [self.mainVC.view addSubview:self.mainVC.armControlVC.view];
+        [self.mainVC.view bringSubviewToFront:self.mainVC.settingVC.view];
+        self.mainVC.armControlVC.isDisplay = YES ;
+    }
+    
+       [self hideSettingView];
+    
+    
+}
 
 @end
