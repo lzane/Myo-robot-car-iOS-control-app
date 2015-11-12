@@ -16,7 +16,7 @@
 
 @interface ZNBlueToothController (){
     
-    BabyBluetooth *baby;
+    __block BabyBluetooth *baby;
 
 }
 
@@ -57,11 +57,12 @@
         
     }];
     
+     __block ZNBlueToothController* btc = self;
     //设置发现设备的Services的委托
     [baby setBlockOnDiscoverServices:^(CBPeripheral *peripheral, NSError *error) {
         for (CBService *s in peripheral.services) {
             //每个service
-            [self.serviceArr addObject:s];
+            [btc.serviceArr addObject:s];
         }
     }];
     
@@ -70,7 +71,7 @@
         for (CBCharacteristic *c in service.characteristics) {
             NSLog(@"charateristic name is :%@",c.UUID);
             if ([c.UUID.UUIDString isEqualToString:@"FFE1"]) {
-                self.charac = c ;
+                btc.charac = c ;
             }
         }
     }];
@@ -105,7 +106,7 @@
 
 
 - (IBAction)startTimerBtnDidClick:(id)sender {
-    NSTimer *timer = [NSTimer timerWithTimeInterval:0.2 target:self selector:@selector(sendData) userInfo:nil repeats:YES];
+    NSTimer *timer = [NSTimer timerWithTimeInterval:0.3 target:self selector:@selector(sendData) userInfo:nil repeats:YES];
     NSRunLoop *runloop = [NSRunLoop mainRunLoop];
     [runloop addTimer:timer forMode:NSRunLoopCommonModes];
     
@@ -139,17 +140,18 @@
 #pragma mark - <Bluetooth Delegate>
 -(void)babyDelegate{
     
-    
+    __block BabyBluetooth* bab = baby ;
+    __block ZNBlueToothController *btc = self;
     //设置扫描到设备的委托
     [baby setBlockOnDiscoverToPeripherals:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI) {
         NSLog(@"搜索到了设备:%@",peripheral.name);
-        if([peripheral.name hasPrefix:@"<6666"]){
-            baby.scanForPeripherals().connectToPeripherals().begin();
+        if([peripheral.name hasPrefix:@"<6666"]||[peripheral.name hasPrefix:@"6666"]){
+            bab.scanForPeripherals().connectToPeripherals().begin();
             
-            self.peripheral = peripheral;
+            btc.peripheral = peripheral;
             
-            if([self.delegate respondsToSelector:@selector(changeBlueToothConnectTo:)]){
-                [self.delegate changeBlueToothConnectTo:YES];
+            if([btc.delegate respondsToSelector:@selector(changeBlueToothConnectTo:)]){
+                [btc.delegate changeBlueToothConnectTo:YES];
             }
             
         }
@@ -204,9 +206,37 @@
     [self.currentOrderLabel setText:[NSString stringWithFormat:@"%d",self.mainVC.moveOrder]] ;
 //    NSLog(@"%d",self.mainVC.moveOrder);
     
-    Byte b = self.mainVC.moveOrder ;
-    NSData *data = [NSData dataWithBytes:&b length:sizeof(b)];
-    [self.peripheral writeValue:data forCharacteristic:self.charac type:CBCharacteristicWriteWithResponse];
+    /**
+     *  send moveOrder
+     */
+    Byte moveb = self.mainVC.moveOrder;
+    NSData *moveData = [NSData dataWithBytes:&moveb length:sizeof(moveb)];
+    [self.peripheral writeValue:moveData forCharacteristic:self.charac type:CBCharacteristicWriteWithResponse];
+    
+    /**
+     *  send holderOrder
+     */
+    Byte holderb = self.mainVC.holderOrder ;
+    NSData *holderData = [NSData dataWithBytes:&holderb length:sizeof(holderb)];
+    [self.peripheral writeValue:holderData forCharacteristic:self.charac type:CBCharacteristicWriteWithResponse];
+    
+    /**
+     *  send armOrder1
+     */
+    Byte arm1b = self.mainVC.armOrder1 ;
+    NSData *arm1Data = [NSData dataWithBytes:&arm1b length:sizeof(arm1b)];
+    [self.peripheral writeValue:arm1Data forCharacteristic:self.charac type:CBCharacteristicWriteWithResponse];
+
+    
+    /**
+     *  send armOrder2
+     */
+    Byte arm2b = self.mainVC.armOrder2 ;
+    NSData *arm2Data = [NSData dataWithBytes:&arm2b length:sizeof(arm2b)];
+    [self.peripheral writeValue:arm2Data forCharacteristic:self.charac type:CBCharacteristicWriteWithResponse];
+    
+//    NSLog(@"moveOrder:%d     holderOreder:%d       armOrder1:%d     armOder2:%d       ",self.mainVC.moveOrder,self.mainVC.holderOrder,self.mainVC.armOrder1,self.mainVC.armOrder2);
+    
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

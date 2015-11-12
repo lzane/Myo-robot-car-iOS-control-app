@@ -13,7 +13,11 @@
 @interface ViewController : UIViewController
 
 @property (nonatomic,assign) int moveOrder ;
-@property (nonatomic,assign) BOOL isMove ;
+@property (nonatomic,assign) int holderOrder ;
+@property (nonatomic,assign) int armOrder1 ;
+@property (nonatomic,assign) int armOrder2 ;
+
+
 @property (strong,nonatomic) ZNCemeraView *cemeraView;
 
 @property (strong, nonatomic) ZNBlueToothController* bluetoothController ;

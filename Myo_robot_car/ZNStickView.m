@@ -38,6 +38,7 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    
     self.stickImageView.image = self.stickHoldOnImage;
     
 }
@@ -114,6 +115,8 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    
+    
     self.stickImageView.image = self.stickReleaseImage;
     self.stickImageView.center = self.backgroundImageView.center ;
     

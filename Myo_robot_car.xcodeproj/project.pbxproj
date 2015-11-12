@@ -15,7 +15,8 @@
 		2F0D84621BE10DDD00DE055B /* BabySpeaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0D845A1BE10DDD00DE055B /* BabySpeaker.m */; };
 		2F0D84631BE10DDD00DE055B /* BabyToy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0D845C1BE10DDD00DE055B /* BabyToy.m */; };
 		2F0D84661BE10FCF00DE055B /* ZNBlueToothController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0D84651BE10FCF00DE055B /* ZNBlueToothController.m */; };
-		2F2862CB1BE47543001EAB67 /* UIWebView+ZN.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2862CA1BE47543001EAB67 /* UIWebView+ZN.m */; };
+		2F572C301BE4C640003249FC /* ZNSetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F572C2E1BE4C640003249FC /* ZNSetingViewController.m */; };
+		2F572C311BE4C640003249FC /* ZNSetingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F572C2F1BE4C640003249FC /* ZNSetingViewController.xib */; };
 		2F8F8C591BD7A375001E785B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F8F8C561BD7A345001E785B /* SystemConfiguration.framework */; };
 		2F8F8C5A1BD7A38B001E785B /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F8F8C541BD7A33A001E785B /* CoreBluetooth.framework */; };
 		2F8F8C661BD7ABB6001E785B /* MBProgressHUD+CZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F8C621BD7ABB6001E785B /* MBProgressHUD+CZ.m */; };
@@ -26,11 +27,7 @@
 		2F9DDCFE1BD69943006D0DE0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9DDCFD1BD69943006D0DE0 /* ViewController.m */; };
 		2F9DDD011BD69943006D0DE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F9DDCFF1BD69943006D0DE0 /* Main.storyboard */; };
 		2F9DDD061BD69943006D0DE0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F9DDD041BD69943006D0DE0 /* LaunchScreen.xib */; };
-		2F9DDD371BD699D8006D0DE0 /* Coordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9DDD231BD699D8006D0DE0 /* Coordinate.m */; };
-		2F9DDD3A1BD699D8006D0DE0 /* FancyTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9DDD291BD699D8006D0DE0 /* FancyTabBar.m */; };
 		2F9DDD3B1BD699D8006D0DE0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F9DDD2B1BD699D8006D0DE0 /* Images.xcassets */; };
-		2F9DDD3E1BD699D8006D0DE0 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9DDD301BD699D8006D0DE0 /* UIImage+ImageEffects.m */; };
-		2F9DDD3F1BD699D8006D0DE0 /* UIView+Screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9DDD321BD699D8006D0DE0 /* UIView+Screenshot.m */; };
 		2FC3FB951BE373E700CC5C9D /* ZNStickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC3FB941BE373E700CC5C9D /* ZNStickView.m */; };
 		2FCC40181BD8AD7100C2EB35 /* MyoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCC40171BD8AD7100C2EB35 /* MyoKit.framework */; };
 		2FE8E8A61BD8F02700789FEB /* ZNCemeraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE8E8A51BD8F02700789FEB /* ZNCemeraView.m */; };
@@ -63,8 +60,9 @@
 		2F0D845C1BE10DDD00DE055B /* BabyToy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyToy.m; sourceTree = "<group>"; };
 		2F0D84641BE10FCF00DE055B /* ZNBlueToothController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZNBlueToothController.h; sourceTree = "<group>"; };
 		2F0D84651BE10FCF00DE055B /* ZNBlueToothController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZNBlueToothController.m; sourceTree = "<group>"; };
-		2F2862C91BE47543001EAB67 /* UIWebView+ZN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+ZN.h"; sourceTree = "<group>"; };
-		2F2862CA1BE47543001EAB67 /* UIWebView+ZN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+ZN.m"; sourceTree = "<group>"; };
+		2F572C2D1BE4C640003249FC /* ZNSetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZNSetingViewController.h; sourceTree = "<group>"; };
+		2F572C2E1BE4C640003249FC /* ZNSetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZNSetingViewController.m; sourceTree = "<group>"; };
+		2F572C2F1BE4C640003249FC /* ZNSetingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZNSetingViewController.xib; sourceTree = "<group>"; };
 		2F8F8C541BD7A33A001E785B /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		2F8F8C561BD7A345001E785B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2F8F8C611BD7ABB6001E785B /* MBProgressHUD+CZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+CZ.h"; sourceTree = "<group>"; };
@@ -80,16 +78,7 @@
 		2F9DDCFD1BD69943006D0DE0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		2F9DDD001BD69943006D0DE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2F9DDD051BD69943006D0DE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		2F9DDD221BD699D8006D0DE0 /* Coordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coordinate.h; sourceTree = "<group>"; };
-		2F9DDD231BD699D8006D0DE0 /* Coordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coordinate.m; sourceTree = "<group>"; };
-		2F9DDD281BD699D8006D0DE0 /* FancyTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FancyTabBar.h; sourceTree = "<group>"; };
-		2F9DDD291BD699D8006D0DE0 /* FancyTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FancyTabBar.m; sourceTree = "<group>"; };
-		2F9DDD2A1BD699D8006D0DE0 /* FancyTabBarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FancyTabBarDelegate.h; sourceTree = "<group>"; };
 		2F9DDD2B1BD699D8006D0DE0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = FancyTabBar/Images.xcassets; sourceTree = "<group>"; };
-		2F9DDD2F1BD699D8006D0DE0 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
-		2F9DDD301BD699D8006D0DE0 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
-		2F9DDD311BD699D8006D0DE0 /* UIView+Screenshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Screenshot.h"; sourceTree = "<group>"; };
-		2F9DDD321BD699D8006D0DE0 /* UIView+Screenshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Screenshot.m"; sourceTree = "<group>"; };
 		2F9DDD411BD69A59006D0DE0 /* Myo_robot_car.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Myo_robot_car.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F9DDD451BD69E0D006D0DE0 /* Myo_robot_carTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Myo_robot_carTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC3FB931BE373E700CC5C9D /* ZNStickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZNStickView.h; sourceTree = "<group>"; };
@@ -185,15 +174,15 @@
 				2F0D84651BE10FCF00DE055B /* ZNBlueToothController.m */,
 				2FC3FB931BE373E700CC5C9D /* ZNStickView.h */,
 				2FC3FB941BE373E700CC5C9D /* ZNStickView.m */,
+				2F572C2D1BE4C640003249FC /* ZNSetingViewController.h */,
+				2F572C2E1BE4C640003249FC /* ZNSetingViewController.m */,
+				2F572C2F1BE4C640003249FC /* ZNSetingViewController.xib */,
 				2F9DDCFF1BD69943006D0DE0 /* Main.storyboard */,
 				2F9DDD2B1BD699D8006D0DE0 /* Images.xcassets */,
 				2F9DDD041BD69943006D0DE0 /* LaunchScreen.xib */,
 				2F0D844E1BE10DDD00DE055B /* objc */,
 				2F8F8C601BD7ABB6001E785B /* MBProgressHUD */,
-				2F9DDD1D1BD699D8006D0DE0 /* FancyTabBar */,
 				2F9DDCF51BD69943006D0DE0 /* Supporting Files */,
-				2F2862C91BE47543001EAB67 /* UIWebView+ZN.h */,
-				2F2862CA1BE47543001EAB67 /* UIWebView+ZN.m */,
 			);
 			path = Myo_robot_car;
 			sourceTree = "<group>";
@@ -205,22 +194,6 @@
 				2F9DDCF71BD69943006D0DE0 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2F9DDD1D1BD699D8006D0DE0 /* FancyTabBar */ = {
-			isa = PBXGroup;
-			children = (
-				2F9DDD221BD699D8006D0DE0 /* Coordinate.h */,
-				2F9DDD231BD699D8006D0DE0 /* Coordinate.m */,
-				2F9DDD281BD699D8006D0DE0 /* FancyTabBar.h */,
-				2F9DDD291BD699D8006D0DE0 /* FancyTabBar.m */,
-				2F9DDD2A1BD699D8006D0DE0 /* FancyTabBarDelegate.h */,
-				2F9DDD2F1BD699D8006D0DE0 /* UIImage+ImageEffects.h */,
-				2F9DDD301BD699D8006D0DE0 /* UIImage+ImageEffects.m */,
-				2F9DDD311BD699D8006D0DE0 /* UIView+Screenshot.h */,
-				2F9DDD321BD699D8006D0DE0 /* UIView+Screenshot.m */,
-			);
-			path = FancyTabBar;
 			sourceTree = "<group>";
 		};
 		2F9DDD461BD69E4B006D0DE0 /* Products */ = {
@@ -312,6 +285,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F572C311BE4C640003249FC /* ZNSetingViewController.xib in Resources */,
 				2F9DDD011BD69943006D0DE0 /* Main.storyboard in Resources */,
 				2F8F8C671BD7ABB6001E785B /* MBProgressHUD.bundle in Resources */,
 				2F9DDD061BD69943006D0DE0 /* LaunchScreen.xib in Resources */,
@@ -333,21 +307,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F2862CB1BE47543001EAB67 /* UIWebView+ZN.m in Sources */,
-				2F9DDD3A1BD699D8006D0DE0 /* FancyTabBar.m in Sources */,
 				2F0D84621BE10DDD00DE055B /* BabySpeaker.m in Sources */,
 				2F9DDCFE1BD69943006D0DE0 /* ViewController.m in Sources */,
 				2F8F8C661BD7ABB6001E785B /* MBProgressHUD+CZ.m in Sources */,
 				2FE8E8A61BD8F02700789FEB /* ZNCemeraView.m in Sources */,
+				2F572C301BE4C640003249FC /* ZNSetingViewController.m in Sources */,
 				2F0D845E1BE10DDD00DE055B /* BabyCallback.m in Sources */,
 				2F9DDCFB1BD69943006D0DE0 /* AppDelegate.m in Sources */,
 				2FC3FB951BE373E700CC5C9D /* ZNStickView.m in Sources */,
 				2F0D845F1BE10DDD00DE055B /* BabyOptions.m in Sources */,
 				2F8F8C681BD7ABB6001E785B /* MBProgressHUD.m in Sources */,
-				2F9DDD3F1BD699D8006D0DE0 /* UIView+Screenshot.m in Sources */,
 				2F0D84661BE10FCF00DE055B /* ZNBlueToothController.m in Sources */,
-				2F9DDD371BD699D8006D0DE0 /* Coordinate.m in Sources */,
-				2F9DDD3E1BD699D8006D0DE0 /* UIImage+ImageEffects.m in Sources */,
 				2F0D84601BE10DDD00DE055B /* BabyRhythm.m in Sources */,
 				2F9DDCF81BD69943006D0DE0 /* main.m in Sources */,
 				2F0D845D1BE10DDD00DE055B /* BabyBluetooth.m in Sources */,
@@ -486,7 +456,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"/Users/zane/Downloads/Myo-iOS-SDK-0.5.2",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -509,7 +478,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"/Users/zane/Downloads/Myo-iOS-SDK-0.5.2",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;

@@ -16,6 +16,9 @@
 #import "BabyBluetooth.h"
 #import "ZNBlueToothController.h"
 #import "ZNSetingViewController.h"
+#import <CoreMotion/CoreMotion.h>
+
+
 
 
 @interface ViewController ()<UIWebViewDelegate,ZNBlueToothDelegate>
@@ -26,10 +29,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *myoLabel;
 
 @property (nonatomic,strong) ZNSetingViewController *settingVC ;
+@property(nonatomic,strong)CMMotionManager *mgr;
 
-
-
-
+@property (nonatomic,assign)BOOL isBack;
+@property (nonatomic,assign)BOOL isLight;
 
 
 
@@ -48,8 +51,68 @@
      */
     [self addCemera];
     
+    if (!self.mgr.isAccelerometerAvailable) return;
+    
+    self.mgr.accelerometerUpdateInterval = 1/10.0;
+    
+    
+    /**
+     *  setHolderOrder
+     *
+     */
+    [self.mgr startAccelerometerUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
+        if (error) return ;
+        
+        
+        CMAcceleration acceleration = accelerometerData.acceleration;
+//        NSLog(@"x:%f y:%f z:%f", acceleration.x, acceleration.y, acceleration.z);
+        
+        int midOrder = 0 ;
+        
+        
+        if (self.isLight == YES) {
+            midOrder = midOrder | (1<<4) ;
+        }
+
+        
+        
+        if (acceleration.x > 0) {  // up
+            midOrder = (1<<1) ;
+        }else if(acceleration.z > 0.1){ // down
+            midOrder = (1<<1)|1 ;
+        }
+        
+        if (acceleration.y < -0.5) { // right
+            midOrder = midOrder | (1<<3);
+        }else if (acceleration.y > 0.5){ //left
+            midOrder = midOrder | (1<<3) | (1<<2) ;
+        }
+        
+        midOrder = midOrder | (1<<6) | (1<<7) ;
+        
+        self.holderOrder = midOrder ;
+//        NSLog(@"%d",self.holderOrder);
+        
+    }];
+
+    
+    
+    
+    /**
+     *  testSendingData without connecting the bluetooth chip using phone
+     */
+    
+//    NSTimer *timer = [NSTimer timerWithTimeInterval:0.2 target:self selector:@selector(printtest) userInfo:nil repeats:YES];
+//    NSRunLoop *runloop = [NSRunLoop mainRunLoop];
+//    [runloop addTimer:timer forMode:NSDefaultRunLoopMode];
     
 }
+
+//-(void)printtest{
+////    NSLog(@"isMove = %d  moveOrder = %d",self.isMove, self.moveOrder);
+//    NSLog(@"isLight = %d  holderOrder = %d",self.isLight , self.holderOrder );
+//}
+
 
 -(void)addCemera{
     
@@ -57,21 +120,10 @@
     [self.view addSubview:cemeraView];
     self.cemeraView = cemeraView ;
     [self.view sendSubviewToBack:cemeraView];
+    [self.view setBackgroundColor:[UIColor colorWithRed:1.0 green:0.5 blue:0.0 alpha:1.0]];
     
 }
 
-
-#pragma mark - FancyTabBarDelegate
-- (void) didCollapse{
-    [UIView animateWithDuration:0.3 animations:^{
-        _backgroundView.alpha = 0;
-    } completion:^(BOOL finished) {
-        if(finished) {
-            [_backgroundView removeFromSuperview];
-            _backgroundView = nil;
-        }
-    }];
-}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"bluetoothView"]) {
@@ -147,7 +199,7 @@
 
 //hold unlock
 - (void)holdUnlockForMyo:(TLMMyo *)myo {
-    NSLog(@"%s",__func__);
+
     [myo unlockWithType:TLMUnlockTypeHold];
 }
 
@@ -167,6 +219,10 @@
     [self.myoLabel setFont:[UIFont boldSystemFontOfSize:14]];
     [MBProgressHUD showMessage:@"Perform the Sync Gesture" toView:self.view];
     
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    });
+    
 }
 
 - (void)didDisconnectDevice:(NSNotification *)notification {
@@ -182,6 +238,9 @@
     TLMMyo *myo = notification.userInfo[kTLMKeyMyo];
     
     [myo unlockWithType:TLMUnlockTypeHold];
+    
+    self.armOrder1 = 1<<7 ;
+    self.armOrder2 = 1<<6 ;
 
     
 }
@@ -193,13 +252,15 @@
 
 - (void)didSyncArm:(NSNotification *)notification {
     // Retrieve the arm event from the notification's userInfo with the kTLMKeyArmSyncEvent key.
-    TLMArmSyncEvent *armEvent = notification.userInfo[kTLMKeyArmSyncEvent];
+//    TLMArmSyncEvent *armEvent = notification.userInfo[kTLMKeyArmSyncEvent];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     
     // Update the armLabel with arm information.
     
 //    NSString *armString = armEvent.arm == TLMArmRight ? @"Right" : @"Left";
 //    NSString *directionString = armEvent.xDirection == TLMArmXDirectionTowardWrist ? @"Toward Wrist" : @"Toward Elbow";
+    
+    
     
 
 }
@@ -208,6 +269,10 @@
     // Reset the labels.
     if([self.myoLabel.text isEqualToString:@"CONNECTED"]){
     [MBProgressHUD showMessage:@"Perform the Sync Gesture" toView:self.view];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        });
     }
 }
 
@@ -215,34 +280,56 @@
     // Retrieve the orientation from the NSNotification's userInfo with the kTLMKeyOrientationEvent key.
     TLMOrientationEvent *orientationEvent = notification.userInfo[kTLMKeyOrientationEvent];
     
+    if (orientationEvent.myo.isLocked == YES) {
+        return ;
+    }
+    
     // Create Euler angles from the quaternion of the orientation.
     TLMEulerAngles *angles = [TLMEulerAngles anglesWithQuaternion:orientationEvent.quaternion];
     
+    /**
+     *  if put hand down , lock the Myo
+     */
+    if (angles.pitch.radians < -1.2 && orientationEvent.myo.isLocked == NO ) {
+        
+        [orientationEvent.myo lock];
+    }
     
-//    NSLog(@"pitch : %lf  yaw : %lf    roll :  %lf   ",angles.pitch.radians,angles.yaw.radians,angles.roll.radians);
-    
-    // Next, we want to apply a rotation and perspective transformation based on the pitch, yaw, and roll.
-    CATransform3D rotationAndPerspectiveTransform = CATransform3DConcat(CATransform3DConcat(CATransform3DRotate (CATransform3DIdentity, angles.pitch.radians, 1.0, 0.0, 0.0), CATransform3DRotate(CATransform3DIdentity, angles.yaw.radians, 0.0, 0.0, 1.0)), CATransform3DRotate(CATransform3DIdentity, angles.roll.radians, 0.0, 1.0, 0.0 ));
+    self.armOrder1 = self.armOrder1 & 204 ;
 
     
     
+//    NSLog(@"roll:%lf   pitch:%lf     yaw:%lf   ",angles.roll.radians,angles.pitch.radians,angles.yaw.radians);
+
     
-    if (angles.pitch.radians < -1.0 && orientationEvent.myo.isLocked == NO ) {
-        [orientationEvent.myo lock];
+    if (angles.roll.radians < -0.6 ) { //right
+        self.armOrder1 = self.armOrder1 | (1<<1) ;
+    }else if(angles.roll.radians >0.6 ){ //left
+        self.armOrder1 = self.armOrder1 | (1<<1) | (1<<0) ;
     }
+    
+
+    if (angles.pitch.radians < -0.6 ) { //down
+        self.armOrder1 = self.armOrder1 | (1<<5) | (1<<4) ;
+    }else if(angles.pitch.radians >0.6 ){ //up
+        self.armOrder1 = self.armOrder1 | (1<<5) ;
+    }
+    
+    
+
     
     
 }
 
 - (void)didReceiveAccelerometerEvent:(NSNotification *)notification {
     // Retrieve the accelerometer event from the NSNotification's userInfo with the kTLMKeyAccelerometerEvent.
-    TLMAccelerometerEvent *accelerometerEvent = notification.userInfo[kTLMKeyAccelerometerEvent];
+//    TLMAccelerometerEvent *accelerometerEvent = notification.userInfo[kTLMKeyAccelerometerEvent];
     
     // Get the acceleration vector from the accelerometer event.
-    TLMVector3 accelerationVector = accelerometerEvent.vector;
+//    TLMVector3 accelerationVector = accelerometerEvent.vector;
     
     // Calculate the magnitude of the acceleration vector.
-    float magnitude = TLMVector3Length(accelerationVector);
+//    float magnitude = TLMVector3Length(accelerationVector);
     
     // Update the progress bar based on the magnitude of the acceleration vector.
 //    self.accelerationProgressBar.progress = magnitude / 8;
@@ -252,51 +339,46 @@
      float y = accelerationVector.y;
      float z = accelerationVector.z;
      */
+    
 }
 
 - (void)didReceivePoseChange:(NSNotification *)notification {
     // Retrieve the pose from the NSNotification's userInfo with the kTLMKeyPose key.
     TLMPose *pose = notification.userInfo[kTLMKeyPose];
-    NSLog(@"%s   + %ld",__func__,(long)pose.type);
-    
-    self.moveOrder = pose.type ;
-    
+    NSLog(@"%s   + %ld", __func__,(long)pose.type);
     
 //    // Handle the cases of the TLMPoseType enumeration, and change the color of helloLabel based on the pose we receive.
-//    switch (pose.type) {
+    switch (pose.type) {
 //        case TLMPoseTypeUnknown:
-//        case TLMPoseTypeRest:
+//            break;
+        case TLMPoseTypeRest:
+            self.armOrder2 = 1<<6 ;
+            self.armOrder1 = self.armOrder1 & 243 ;
+            break;
 //        case TLMPoseTypeDoubleTap:
 //            // Changes helloLabel's font to Helvetica Neue when the user is in a rest or unknown pose.
-//            self.helloLabel.text = @"Hello Myo";
-//            self.helloLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:50];
-//            self.helloLabel.textColor = [UIColor blackColor];
-//            break;
-//        case TLMPoseTypeFist:
-//            // Changes helloLabel's font to Noteworthy when the user is in a fist pose.
-//            self.helloLabel.text = @"Fist";
-//            self.helloLabel.font = [UIFont fontWithName:@"Noteworthy" size:50];
-//            self.helloLabel.textColor = [UIColor greenColor];
-//            break;
-//        case TLMPoseTypeWaveIn:
-//            // Changes helloLabel's font to Courier New when the user is in a wave in pose.
-//            self.helloLabel.text = @"Wave In";
-//            self.helloLabel.font = [UIFont fontWithName:@"Courier New" size:50];
-//            self.helloLabel.textColor = [UIColor greenColor];
-//            break;
-//        case TLMPoseTypeWaveOut:
-//            // Changes helloLabel's font to Snell Roundhand when the user is in a wave out pose.
-//            self.helloLabel.text = @"Wave Out";
-//            self.helloLabel.font = [UIFont fontWithName:@"Snell Roundhand" size:50];
-//            self.helloLabel.textColor = [UIColor greenColor];
-//            break;
-//        case TLMPoseTypeFingersSpread:
-//            // Changes helloLabel's font to Chalkduster when the user is in a fingers spread pose.
-//            self.helloLabel.text = @"Fingers Spread";
-//            self.helloLabel.font = [UIFont fontWithName:@"Chalkduster" size:50];
-//            self.helloLabel.textColor = [UIColor greenColor];
-//            break;
-//    }
+            break;
+        case TLMPoseTypeFist:
+            // Changes helloLabel's font to Noteworthy when the user is in a fist pose.
+            self.armOrder2 = self.armOrder2 | 32 ;
+            break;
+
+        case TLMPoseTypeFingersSpread:
+            // Changes helloLabel's font to Chalkduster when the user is in a fingers spread pose.
+            self.armOrder2 = self.armOrder2 | 48 ;
+            break;
+
+        case TLMPoseTypeWaveIn:
+            // Changes helloLabel's font to Courier New when the user is in a wave in pose.
+            self.armOrder1 = self.armOrder1 | 8 ;
+            break;
+      case TLMPoseTypeWaveOut:
+            self.armOrder1 = self.armOrder1 | 12 ;
+            break;
+
+        default:
+            break;
+    }
     
     // Unlock the Myo whenever we receive a pose
     if (pose.type == TLMPoseTypeUnknown || pose.type == TLMPoseTypeRest) {
@@ -358,6 +440,14 @@
     return _settingVC ;
 }
 
+- (CMMotionManager *)mgr
+{
+    if (_mgr == nil) {
+        _mgr = [[CMMotionManager alloc] init];
+    }
+    return _mgr;
+}
+
 #pragma mark -- Button method
 
 - (IBAction)settingBtnDidClick:(id)sender {
@@ -379,6 +469,14 @@
     if (self.settingVC) {
             [self.settingVC hideSettingView];
     }
+}
+- (IBAction)lightBtnDidClick:(id)sender {
+
+    
+    UIButton *senderBtn = sender ;
+    [senderBtn setSelected:!senderBtn.isSelected];
+    self.isLight = !self.isLight ;
+    
 }
 
 

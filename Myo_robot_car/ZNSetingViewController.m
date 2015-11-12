@@ -53,7 +53,7 @@
     if (!self.mainVC.bluetoothController) {
         [self.mainVC performSegueWithIdentifier:@"bluetoothView" sender:nil];
     }else{
-        [self.mainVC presentViewController:self.mainVC.bluetoothController animated:YES completion:^{
+        [self.mainVC presentViewController:(UIViewController*)self.mainVC.bluetoothController animated:YES completion:^{
         }];
     }
     
