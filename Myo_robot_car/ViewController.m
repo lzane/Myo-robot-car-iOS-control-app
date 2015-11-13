@@ -50,6 +50,8 @@
      */
     self.armMove = 0 ;
     self.bandMode = 0 ;
+    self.armOrder1 = 1<<7 ;
+    self.armOrder2 = 1<<6 ;
     
     /**
      * cemeraView
@@ -107,16 +109,17 @@
      *  testSendingData without connecting the bluetooth chip using phone
      */
     
-    //    NSTimer *timer = [NSTimer timerWithTimeInterval:0.2 target:self selector:@selector(printtest) userInfo:nil repeats:YES];
-    //    NSRunLoop *runloop = [NSRunLoop mainRunLoop];
-    //    [runloop addTimer:timer forMode:NSDefaultRunLoopMode];
+        NSTimer *timer = [NSTimer timerWithTimeInterval:0.2 target:self selector:@selector(printtest) userInfo:nil repeats:YES];
+        NSRunLoop *runloop = [NSRunLoop mainRunLoop];
+        [runloop addTimer:timer forMode:NSDefaultRunLoopMode];
     
 }
 
-//-(void)printtest{
-////    NSLog(@"isMove = %d  moveOrder = %d",self.isMove, self.moveOrder);
+-(void)printtest{
+//    NSLog(@"isMove = %d  moveOrder = %d",self.isMove, self.moveOrder);
 //    NSLog(@"isLight = %d  holderOrder = %d",self.isLight , self.holderOrder );
-//}
+    NSLog(@"armOrder1 = %d     armOrder2 = %d ",self.armOrder1,self.armOrder2);
+}
 
 
 -(void)addCemera{
@@ -516,7 +519,7 @@
 -(armControlViewController *)armControlVC{
     if (_armControlVC == nil) {
         _armControlVC = [[armControlViewController alloc]init];
-        _armControlVC.view.frame = CGRectMake(0, 0, 145, 200);
+        _armControlVC.view.frame = CGRectMake(0, 0, 145, 246);
         _armControlVC.view.center = self.view.center ;
         [_armControlVC.view  setTransform:CGAffineTransformMakeRotation(-M_PI_2)];
         _armControlVC.isDisplay = NO ;

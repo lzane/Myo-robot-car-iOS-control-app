@@ -10,6 +10,8 @@
                 <outlet property="slider1" destination="kgn-I5-4I5" id="rGV-bG-gsL"/>
                 <outlet property="slider2" destination="6pz-b5-Bvc" id="BxC-39-CMZ"/>
                 <outlet property="slider3" destination="e84-Wa-lfU" id="KJc-um-gV5"/>
+                <outlet property="slider4" destination="6hL-eF-yJH" id="LnQ-GG-HON"/>
+                <outlet property="swipeGesture" destination="zPD-cs-ZZR" id="0IV-eW-HiG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,17 +22,22 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="infoBackground" translatesAutoresizingMaskIntoConstraints="NO" id="SxA-4O-1zb">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <gestureRecognizers/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="0.0" y="0.0" width="145" height="200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="145" height="246"/>
                     </variation>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="zPD-cs-ZZR" appends="YES" id="4zD-Mu-E0K"/>
+                    </connections>
                 </imageView>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="6pz-b5-Bvc">
                     <rect key="frame" x="0.0" y="-15" width="118" height="31"/>
                     <color key="tintColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="11" y="85" width="122" height="31"/>
+                        <rect key="frame" x="11" y="78" width="122" height="31"/>
                     </variation>
                     <connections>
+                        <action selector="sliderValueChanged:" destination="-1" eventType="valueChanged" id="nad-If-cOA"/>
                         <action selector="touchUpInside:" destination="-1" eventType="touchUpInside" id="afT-6i-bTD"/>
                         <action selector="touchUpOutside:" destination="-1" eventType="touchUpOutside" id="Ynx-VJ-Zaf"/>
                     </connections>
@@ -39,9 +46,10 @@
                     <rect key="frame" x="0.0" y="-15" width="118" height="31"/>
                     <color key="tintColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="11" y="23" width="122" height="31"/>
+                        <rect key="frame" x="11" y="16" width="122" height="31"/>
                     </variation>
                     <connections>
+                        <action selector="sliderValueChanged:" destination="-1" eventType="valueChanged" id="gbI-fL-mIh"/>
                         <action selector="touchUpInside:" destination="-1" eventType="touchUpInside" id="flj-tK-ghz"/>
                         <action selector="touchUpOutside:" destination="-1" eventType="touchUpOutside" id="MMg-5b-AbP"/>
                     </connections>
@@ -50,15 +58,29 @@
                     <rect key="frame" x="0.0" y="-15" width="118" height="31"/>
                     <color key="tintColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="11" y="146" width="122" height="31"/>
+                        <rect key="frame" x="11" y="139" width="122" height="31"/>
                     </variation>
                     <connections>
+                        <action selector="sliderValueChanged:" destination="-1" eventType="valueChanged" id="EHP-Xr-Pnc"/>
                         <action selector="touchUpInside:" destination="-1" eventType="touchUpInside" id="wpB-j3-X9z"/>
                         <action selector="touchUpOutside:" destination="-1" eventType="touchUpOutside" id="xfE-kY-0Op"/>
                     </connections>
                 </slider>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="6hL-eF-yJH">
+                    <rect key="frame" x="0.0" y="-15" width="118" height="31"/>
+                    <color key="tintColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="11" y="201" width="122" height="31"/>
+                    </variation>
+                    <connections>
+                        <action selector="sliderValueChanged:" destination="-1" eventType="valueChanged" id="kxt-MQ-g4C"/>
+                        <action selector="touchUpInside:" destination="-1" eventType="touchUpInside" id="Yt5-q1-LwN"/>
+                        <action selector="touchUpOutside:" destination="-1" eventType="touchUpOutside" id="b0b-0C-z8J"/>
+                    </connections>
+                </slider>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -68,6 +90,7 @@
                     <exclude reference="6pz-b5-Bvc"/>
                     <exclude reference="kgn-I5-4I5"/>
                     <exclude reference="e84-Wa-lfU"/>
+                    <exclude reference="6hL-eF-yJH"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
@@ -76,10 +99,19 @@
                     <include reference="6pz-b5-Bvc"/>
                     <include reference="kgn-I5-4I5"/>
                     <include reference="e84-Wa-lfU"/>
+                    <include reference="6hL-eF-yJH"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="182.5" y="138"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="zPD-cs-ZZR" appends="YES" id="1Y2-EB-ImP"/>
+            </connections>
+            <point key="canvasLocation" x="182" y="138"/>
         </view>
+        <swipeGestureRecognizer direction="right" id="zPD-cs-ZZR">
+            <connections>
+                <action selector="SwipeGuestureDidSwipre:" destination="-1" id="LWg-mG-dvO"/>
+            </connections>
+        </swipeGestureRecognizer>
     </objects>
     <resources>
         <image name="infoBackground" width="765" height="400"/>
