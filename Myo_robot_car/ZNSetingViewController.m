@@ -76,5 +76,9 @@
     
     
 }
+- (IBAction)infoBtnDidClick:(id)sender {
+    [self.mainVC performSegueWithIdentifier:@"toInfo" sender:sender];
+    [self hideSettingView];
+}
 
 @end

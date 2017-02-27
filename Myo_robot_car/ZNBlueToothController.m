@@ -106,7 +106,7 @@
 
 
 - (IBAction)startTimerBtnDidClick:(id)sender {
-    NSTimer *timer = [NSTimer timerWithTimeInterval:0.3 target:self selector:@selector(sendData) userInfo:nil repeats:YES];
+    NSTimer *timer = [NSTimer timerWithTimeInterval:0.35 target:self selector:@selector(sendData) userInfo:nil repeats:YES];
     NSRunLoop *runloop = [NSRunLoop mainRunLoop];
     [runloop addTimer:timer forMode:NSRunLoopCommonModes];
     
@@ -145,7 +145,7 @@
     //设置扫描到设备的委托
     [baby setBlockOnDiscoverToPeripherals:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI) {
         NSLog(@"搜索到了设备:%@",peripheral.name);
-        if([peripheral.name hasPrefix:@"<6666"]||[peripheral.name hasPrefix:@"6666"]){
+        if([peripheral.name hasPrefix:@"<raspberr"]||[peripheral.name hasPrefix:@"raspberr"]){
             bab.scanForPeripherals().connectToPeripherals().begin();
             
             btc.peripheral = peripheral;
@@ -203,39 +203,49 @@
 
 -(void)sendData{
     
-    [self.currentOrderLabel setText:[NSString stringWithFormat:@"%d",self.mainVC.moveOrder]] ;
+//    [self.currentOrderLabel setText:[NSString stringWithFormat:@"%d",self.mainVC.moveOrder]] ;
 //    NSLog(@"%d",self.mainVC.moveOrder);
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        /**
+         *  send moveOrder
+         */
+        Byte moveb = self.mainVC.moveOrder;
+        NSData *moveData = [NSData dataWithBytes:&moveb length:sizeof(moveb)];
+        [self.peripheral writeValue:moveData forCharacteristic:self.charac type:CBCharacteristicWriteWithResponse];
+//    });
     
-    /**
-     *  send moveOrder
-     */
-    Byte moveb = self.mainVC.moveOrder;
-    NSData *moveData = [NSData dataWithBytes:&moveb length:sizeof(moveb)];
-    [self.peripheral writeValue:moveData forCharacteristic:self.charac type:CBCharacteristicWriteWithResponse];
-    
-    /**
-     *  send holderOrder
-     */
-    Byte holderb = self.mainVC.holderOrder ;
-    NSData *holderData = [NSData dataWithBytes:&holderb length:sizeof(holderb)];
-    [self.peripheral writeValue:holderData forCharacteristic:self.charac type:CBCharacteristicWriteWithResponse];
-    
-    /**
-     *  send armOrder1
-     */
-    Byte arm1b = self.mainVC.armOrder1 ;
-    NSData *arm1Data = [NSData dataWithBytes:&arm1b length:sizeof(arm1b)];
-    [self.peripheral writeValue:arm1Data forCharacteristic:self.charac type:CBCharacteristicWriteWithResponse];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        /**
+         *  send holderOrder
+         */
+        Byte holderb = self.mainVC.holderOrder ;
+        NSData *holderData = [NSData dataWithBytes:&holderb length:sizeof(holderb)];
+        [self.peripheral writeValue:holderData forCharacteristic:self.charac type:CBCharacteristicWriteWithResponse];
+        
+//    });
 
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        
+//        /**
+//         *  send armOrder1
+//         */
+//        Byte arm1b = self.mainVC.armOrder1 ;
+//        NSData *arm1Data = [NSData dataWithBytes:&arm1b length:sizeof(arm1b)];
+//        [self.peripheral writeValue:arm1Data forCharacteristic:self.charac type:CBCharacteristicWriteWithResponse];
+//    });
+//    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        /**
+//         *  send armOrder2
+//         */
+//        Byte arm2b = self.mainVC.armOrder2 ;
+//        NSData *arm2Data = [NSData dataWithBytes:&arm2b length:sizeof(arm2b)];
+//        [self.peripheral writeValue:arm2Data forCharacteristic:self.charac type:CBCharacteristicWriteWithResponse];
+//        //
+//
+//    });
     
-    /**
-     *  send armOrder2
-     */
-    Byte arm2b = self.mainVC.armOrder2 ;
-    NSData *arm2Data = [NSData dataWithBytes:&arm2b length:sizeof(arm2b)];
-    [self.peripheral writeValue:arm2Data forCharacteristic:self.charac type:CBCharacteristicWriteWithResponse];
-    
-//    NSLog(@"moveOrder:%d     holderOreder:%d       armOrder1:%d     armOder2:%d       ",self.mainVC.moveOrder,self.mainVC.holderOrder,self.mainVC.armOrder1,self.mainVC.armOrder2);
+    //    NSLog(@"moveOrder:%d     holderOreder:%d       armOrder1:%d     armOder2:%d       ",self.mainVC.moveOrder,self.mainVC.holderOrder,self.mainVC.armOrder1,self.mainVC.armOrder2);
     
 }
 
@@ -252,6 +262,30 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
+ 
+ 
 */
+/**
+ *  force landscape in order to display lauchimage
+ *  since apple don't provide 4-inch landscape launchscreen  :( bad guy
+ *
+ */
+-(void)viewDidAppear:(BOOL)animated{
+    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
+    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    
+}
+
+- (BOOL) shouldAutorotate
+{
+    // this lines permit rotate if viewController is not portrait
+    UIInterfaceOrientation orientationStatusBar =[[UIApplication sharedApplication] statusBarOrientation];
+    if (orientationStatusBar != UIInterfaceOrientationPortrait) {
+        return NO;
+    }
+    //this line not permit rotate is the viewController is portrait
+    return YES;
+}
+
 
 @end

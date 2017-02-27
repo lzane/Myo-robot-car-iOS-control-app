@@ -53,6 +53,7 @@
     self.armOrder1 = 1<<7 ;
     self.armOrder2 = 1<<6 ;
     
+    
     /**
      * cemeraView
      */
@@ -104,23 +105,23 @@
     
     
     
-    
-    /**
-     *  testSendingData without connecting the bluetooth chip using phone
-     */
-    
-        NSTimer *timer = [NSTimer timerWithTimeInterval:0.2 target:self selector:@selector(printtest) userInfo:nil repeats:YES];
-        NSRunLoop *runloop = [NSRunLoop mainRunLoop];
-        [runloop addTimer:timer forMode:NSDefaultRunLoopMode];
+//    
+//    /**
+//     *  testSendingData without connecting the bluetooth chip using phone
+//     */
+//    
+//        NSTimer *timer = [NSTimer timerWithTimeInterval:0.2 target:self selector:@selector(printtest) userInfo:nil repeats:YES];
+//        NSRunLoop *runloop = [NSRunLoop mainRunLoop];
+//        [runloop addTimer:timer forMode:NSDefaultRunLoopMode];
     
 }
-
--(void)printtest{
-//    NSLog(@"isMove = %d  moveOrder = %d",self.isMove, self.moveOrder);
-//    NSLog(@"isLight = %d  holderOrder = %d",self.isLight , self.holderOrder );
-    NSLog(@"armOrder1 = %d     armOrder2 = %d ",self.armOrder1,self.armOrder2);
-}
-
+//
+//-(void)printtest{
+//    NSLog(@"moveOrder = %d", self.moveOrder);
+////    NSLog(@"isLight = %d  holderOrder = %d",self.isLight , self.holderOrder );
+////    NSLog(@"armOrder1 = %d     armOrder2 = %d ",self.armOrder1,self.armOrder2);
+//}
+//
 
 -(void)addCemera{
     
@@ -417,18 +418,19 @@
         switch (pose.type) {
                 //        case TLMPoseTypeUnknown:
                 //            break;
-            case TLMPoseTypeRest:
-                self.armMove = 0 ;
-                self.moveOrder = 0x00 ;
-                break;
-                //        case TLMPoseTypeDoubleTap:
-                //            // Changes helloLabel's font to Helvetica Neue when the user is in a rest or unknown pose.
-                break;
-            case TLMPoseTypeFist:
-                // Changes helloLabel's font to Noteworthy when the user is in a fist pose.
-                
-                break;
-                
+//            case TLMPoseTypeRest:
+//                self.armMove = 0 ;
+//                self.moveOrder = 0x00 ;
+//                break;
+//                //        case TLMPoseTypeDoubleTap:
+//                //            // Changes helloLabel's font to Helvetica Neue when the user is in a rest or unknown pose.
+//                break;
+//            case TLMPoseTypeFist:
+//                // Changes helloLabel's font to Noteworthy when the user is in a fist pose.
+//                self.armMove = 0 ;
+//                self.moveOrder = 0x00 ;
+//                break;
+//                
             case TLMPoseTypeFingersSpread:
                 // Changes helloLabel's font to Chalkduster when the user is in a fingers spread pose.
                 self.armMove = 1;
@@ -441,7 +443,14 @@
                 self.armMove = 0 ;
                 break;
                 
+            case TLMPoseTypeWaveOut:
+                self.armMove = 1;
+                self.moveOrder = 0x9 ; // 0000 1001
+                break;
+
             default:
+                self.armMove = 0 ;
+                self.moveOrder = 0x00 ;
                 break;
                 
         }
@@ -570,6 +579,30 @@
         senderBtn.selected = NO ;
     }
 }
+
+#pragma mark -- force orientation
+/**
+ *  force landscape in order to display lauchimage
+ *  since apple don't provide 4-inch landscape launchscreen  :( bad guy
+ *
+ */
+-(void)viewDidAppear:(BOOL)animated{
+    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
+    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    
+}
+
+- (BOOL) shouldAutorotate
+{
+    // this lines permit rotate if viewController is not portrait
+    UIInterfaceOrientation orientationStatusBar =[[UIApplication sharedApplication] statusBarOrientation];
+    if (orientationStatusBar != UIInterfaceOrientationPortrait) {
+        return NO;
+    }
+    //this line not permit rotate is the viewController is portrait
+    return YES;
+}
+
 
 
 @end

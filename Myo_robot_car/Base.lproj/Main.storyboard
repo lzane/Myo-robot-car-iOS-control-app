@@ -207,11 +207,64 @@
                         <outlet property="myoLabel" destination="YPa-Kz-nH1" id="gHo-Pk-Pkb"/>
                         <outlet property="settingBtn" destination="hjs-Sn-Ksj" id="y8n-Mr-J9M"/>
                         <segue destination="DyB-v9-iJa" kind="presentation" identifier="bluetoothView" id="a45-hP-0ur"/>
+                        <segue destination="cZD-1d-8wA" kind="presentation" identifier="toInfo" id="nhh-Si-Jmo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="645" y="297"/>
+            <point key="canvasLocation" x="637.5" y="362"/>
+        </scene>
+        <!--Info View Controller-->
+        <scene sceneID="7cx-2f-6oe">
+            <objects>
+                <viewController id="cZD-1d-8wA" customClass="infoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="H9o-HA-RSb"/>
+                        <viewControllerLayoutGuide type="bottom" id="ebv-hE-sLO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sKd-ko-IBg">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info" translatesAutoresizingMaskIntoConstraints="NO" id="3ld-po-gei">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                </variation>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IeV-3v-QRU">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="BACK">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="264" y="277" width="40" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="backBtnDidClick:" destination="cZD-1d-8wA" eventType="touchUpInside" id="ZbL-5W-VS1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="3ld-po-gei"/>
+                                <exclude reference="IeV-3v-QRU"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="3ld-po-gei"/>
+                                <include reference="IeV-3v-QRU"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kwB-Fc-mSp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2038.5" y="515"/>
         </scene>
         <!--Blue Tooth Controller-->
         <scene sceneID="Hao-ql-NAq">
@@ -441,6 +494,7 @@
         <image name="Light_on" width="622" height="621"/>
         <image name="Myo" width="284" height="283"/>
         <image name="StickbackGround" width="1391" height="1390"/>
+        <image name="info" width="1136" height="640"/>
         <image name="infoBackground" width="765" height="400"/>
         <image name="setting_off" width="622" height="621"/>
         <image name="setting_on" width="622" height="621"/>

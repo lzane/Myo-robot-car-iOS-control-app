@@ -61,6 +61,9 @@
                     <variation key="widthClass=compact" fixedFrame="YES">
                         <rect key="frame" x="230" y="10" width="55" height="55"/>
                     </variation>
+                    <connections>
+                        <action selector="infoBtnDidClick:" destination="-1" eventType="touchUpInside" id="tQg-M7-gqe"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
